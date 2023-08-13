@@ -31,18 +31,20 @@ const TreeNode = ({
       case 'Enter':
       case ' ':
         setExpanded(!expanded);
-        event.preventDefault();
+        break;
+      case 'ArrowRight':
+        setExpanded(true);
+        break;
+      case 'ArrowLeft':
+        setExpanded(false);
         break;
       case 'ArrowDown':
         nodeRefs[posinset + 1]?.current?.focus();
-        console.log(
-          `I clicked Arrowdown on ${
-            nodeRefs[posinset].current
-          } to focus the next one, which is ${nodeRefs[posinset + 1]}`
-        );
+
         break;
       case 'ArrowUp':
         nodeRefs[posinset - 1]?.current?.focus();
+        console.log(posinset);
         break;
       case 'Home':
         nodeRefs[0]?.current?.focus();
@@ -71,12 +73,7 @@ const TreeNode = ({
       {expanded && children && (
         <ul role='group'>
           {children.map((child, index) => (
-            <TreeNode
-              key={index}
-              {...child}
-              childrenLength={children.length}
-              posinset={index}
-            />
+            <TreeNode key={index} {...child} childrenLength={children.length} />
           ))}
         </ul>
       )}
