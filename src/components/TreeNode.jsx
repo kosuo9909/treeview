@@ -42,6 +42,7 @@ const TreeNode = ({
         break;
       case 'ArrowLeft':
         setExpanded(false);
+        nodeRefs[posinset]?.current?.focus();
         break;
       case 'ArrowDown':
         if (event.target.nextElementSibling) {
