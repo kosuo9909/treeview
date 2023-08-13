@@ -10,7 +10,7 @@ const TreeView = () => {
           key={index}
           {...node}
           parentNodesLength={lengthOfTreeData}
-          posinset={index + 1}
+          posinset={index}
         />
       ))}
     </div>

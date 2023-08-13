@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 
 // Define nodeRefs globally or in a parent component
 const nodeRefs = [];
-const nestedNodeRefs = [];
 
 const TreeNode = ({
   label,
@@ -18,7 +17,6 @@ const TreeNode = ({
   const nodeRef = useRef(null);
   const nestedNodeRef = useRef(null);
 
-  // Register the current ref in the global list
   useEffect(() => {
     nodeRefs[posinset] = nodeRef;
   }, [posinset]);
@@ -40,8 +38,6 @@ const TreeNode = ({
         break;
       case 'ArrowRight':
         setExpanded(true);
-        // event.target.firstChild.focus();
-        console.log(event.target.firstElementChild);
 
         break;
       case 'ArrowLeft':
@@ -56,13 +52,14 @@ const TreeNode = ({
         break;
       case 'ArrowUp':
         nodeRefs[posinset - 1]?.current?.focus();
-        console.log(posinset);
         break;
       case 'Home':
         nodeRefs[0]?.current?.focus();
+
         break;
       case 'End':
-        nodeRefs[posinset - 1]?.current?.focus();
+        nodeRefs[nodeRefs.length - 1]?.current?.focus();
+
         break;
       default:
         break;
