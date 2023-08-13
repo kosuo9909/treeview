@@ -15,7 +15,6 @@ const TreeNode = ({
   const ariaLabel =
     nestedIndex + 1 < childrenLength ? `Expand ${label}` : undefined;
   const nodeRef = useRef(null);
-  const nestedNodeRef = useRef(null);
 
   useEffect(() => {
     nodeRefs[posinset] = nodeRef;
@@ -52,7 +51,11 @@ const TreeNode = ({
         }
         break;
       case 'ArrowUp':
-        nodeRefs[posinset - 1]?.current?.focus();
+        if (event.target.previousElementSibling) {
+          event.target.previousElementSibling.focus();
+        } else {
+          nodeRefs[posinset]?.current?.focus();
+        }
         break;
       case 'Home':
         nodeRefs[0]?.current?.focus();
@@ -81,7 +84,7 @@ const TreeNode = ({
     >
       {label}
       {expanded && children && (
-        <ul role='group' ref={nestedNodeRef}>
+        <ul role='group'>
           {children.map((child, index) => (
             <TreeNode
               key={index}
