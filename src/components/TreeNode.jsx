@@ -34,7 +34,7 @@ const TreeNode = ({
         event.preventDefault();
         break;
       case 'ArrowDown':
-        nodeRefs[posinset - 1].current.focus();
+        nodeRefs[posinset + 1]?.current?.focus();
         console.log(
           `I clicked Arrowdown on ${
             nodeRefs[posinset].current
@@ -69,7 +69,7 @@ const TreeNode = ({
     >
       {label}
       {expanded && children && (
-        <ul role='group' ref={nodeRef}>
+        <ul role='group'>
           {children.map((child, index) => (
             <TreeNode
               key={index}
