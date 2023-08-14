@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 
-// Define nodeRefs globally or in a parent component
 const nodeRefs = [];
 
 const TreeNode = ({
@@ -8,12 +7,10 @@ const TreeNode = ({
   children,
   lengthOfTreeData,
   posinset,
-  childrenLength,
-  nestedIndex,
+  hasChildren,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const ariaLabel =
-    nestedIndex + 1 < childrenLength ? `Expand ${label}` : undefined;
+  const ariaLabel = hasChildren ? `Expand ${label}` : undefined;
   const nodeRef = useRef(null);
 
   useEffect(() => {
@@ -40,8 +37,8 @@ const TreeNode = ({
 
         break;
       case 'ArrowLeft':
-        setExpanded(false);
         nodeRefs[posinset]?.current?.focus();
+        setExpanded(false);
         break;
       case 'ArrowDown':
         if (event.target.nextElementSibling) {
@@ -73,8 +70,8 @@ const TreeNode = ({
   return (
     <div
       ref={nodeRef}
-      role='treeitem'
-      tabIndex='0'
+      role="treeitem"
+      tabIndex="0"
       aria-label={ariaLabel}
       aria-selected={expanded}
       aria-posinset={posinset}
@@ -84,13 +81,12 @@ const TreeNode = ({
     >
       {label}
       {expanded && children && (
-        <ul role='group'>
+        <ul role="group">
           {children.map((child, index) => (
             <TreeNode
               key={index}
               {...child}
-              childrenLength={children.length}
-              nestedIndex={index}
+              hasChildren={child.children ? true : false}
             />
           ))}
         </ul>
