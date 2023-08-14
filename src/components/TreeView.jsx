@@ -11,6 +11,7 @@ const TreeView = () => {
           {...node}
           parentNodesLength={lengthOfTreeData}
           posinset={index}
+          hasChildren={node.children}
         />
       ))}
     </div>

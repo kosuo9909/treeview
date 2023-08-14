@@ -10,8 +10,15 @@ const TreeNode = ({
   hasChildren,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const ariaLabel = hasChildren ? `Expand ${label}` : undefined;
+
+  const [ariaLabel, setLabel] = useState(
+    hasChildren ? `Expand ${label}` : `Not expandable ${label}`
+  );
   const nodeRef = useRef(null);
+
+  useEffect(() => {
+    setLabel(hasChildren ? `Expand ${label}` : `Not expandable ${label}`);
+  }, [hasChildren, label]);
 
   useEffect(() => {
     nodeRefs[posinset] = nodeRef;
@@ -60,7 +67,6 @@ const TreeNode = ({
         break;
       case 'End':
         nodeRefs[nodeRefs.length - 1]?.current?.focus();
-
         break;
       default:
         break;
