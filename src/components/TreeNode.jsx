@@ -35,14 +35,16 @@ const TreeNode = ({
       case ' ':
         setExpanded(!expanded);
         break;
+
       case 'ArrowRight':
         setExpanded(true);
-
         break;
+
       case 'ArrowLeft':
         setExpanded(false);
         nodeRefs[posinset]?.current?.focus();
         break;
+
       case 'ArrowDown':
         if (event.target.nextElementSibling) {
           event.target.nextElementSibling.focus();
@@ -50,6 +52,7 @@ const TreeNode = ({
           nodeRefs[posinset + 1]?.current?.focus();
         }
         break;
+
       case 'ArrowUp':
         if (event.target.previousElementSibling) {
           event.target.previousElementSibling.focus();
@@ -57,14 +60,15 @@ const TreeNode = ({
           nodeRefs[posinset]?.current?.focus();
         }
         break;
+
       case 'Home':
         nodeRefs[0]?.current?.focus();
-
         break;
+
       case 'End':
         nodeRefs[nodeRefs.length - 1]?.current?.focus();
-
         break;
+
       default:
         break;
     }
