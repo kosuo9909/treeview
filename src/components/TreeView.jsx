@@ -4,13 +4,14 @@ import { treeData } from './storage/TreeData';
 const TreeView = () => {
   const lengthOfTreeData = treeData.length;
   return (
-    <div role='tree' tabIndex={0}>
+    <div role="tree" tabIndex={0} aria-label="A tree consisting of basic nodes">
       {treeData.map((node, index) => (
         <TreeNode
           key={index}
           {...node}
           parentNodesLength={lengthOfTreeData}
           posinset={index}
+          hasChildren={node.children}
         />
       ))}
     </div>
